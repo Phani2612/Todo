@@ -1,0 +1,77 @@
+<html>
+    <head>
+        <title>Learning Javascript</title>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    </head>
+
+    <body>
+
+        <!-- <h1>Welcome to Javascript DOM</h1> -->
+
+        <h1>Todo Application Development!</h1>
+
+        <label>Enter Task:</label>
+        <input type="text" placeholder="Enter Task...."/>
+
+        <button id="addbutton">Add Task</button>
+
+        <ul>
+
+        </ul>
+
+        <script src="practice.js"></script>
+    </body>
+</html>
+
+
+
+
+const AddButton = document.querySelector("#addbutton")
+const InputBox = document.querySelector("input")
+const MyUl = document.querySelector("ul")
+
+//Logic to continuosly check whether something is present in the
+// input box or not
+
+emptyCheckLogic()
+
+function emptyCheckLogic()
+{
+    if(InputBox.value === "")
+    {
+        AddButton.setAttribute("disabled", true)
+    }
+    else
+    {
+        AddButton.removeAttribute("disabled")
+    }
+}
+
+InputBox.addEventListener("input", function()
+{
+    emptyCheckLogic()
+})
+
+AddButton.addEventListener("click", function()
+{
+        let enteredTask = InputBox.value//Read the task
+
+        let myLi = document.createElement("li")//<li></li>
+        myLi.innerHTML = `${enteredTask} <i class="fa-solid fa-trash" id="deletebutton"></i>`
+    
+        MyUl.appendChild(myLi)
+    
+        InputBox.value = ""
+
+        emptyCheckLogic()
+
+        const DeleteButton = myLi.querySelector("#deletebutton")
+        
+        DeleteButton.addEventListener("click", function()
+        {
+            //Logic to delete the entire li
+           myLi.remove()
+        })
+})
+
+{/* <li> Playing <button>Delete</button> </li> */}
